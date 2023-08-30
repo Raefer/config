@@ -32,7 +32,6 @@ vim.o.breakindent = true
 vim.o.mouse = 'a'
 
 
-
 -- [[ LAZY SETUP ]]
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -99,14 +98,19 @@ local plugins = {
   -- Theme
   {
     'navarasu/onedark.nvim',
-    priority = 1000,
+    priority = 500,
     config = function()
       vim.cmd.colorscheme('onedark')
     end,
-    opts = {
-      style = 'warm',
-    },
   },
+
+  -- {
+  --   'neanias/everforest-nvim',
+  --   priority = 1000,
+  --   config = function ()
+  --     vim.cmd.colorscheme('everforest')
+  --   end
+  -- },
 
   -- Statusline
   {
@@ -169,23 +173,28 @@ local plugins = {
 
 require("lazy").setup(plugins, {})
 
+-- autoformat
+-- require('plugins.autoformat')
+
 
 -- [[ CONFIGURING TELESCOPE ]]
-require('telescope-conf')
+require('conf.telescope-conf')
 
 -- [[ CONFIGURING TREESITTER ]]
-require('treesitter-conf')
+require('conf.treesitter-conf')
 
 -- [[ CONFIGURING LSP ]]
-require('lsp-conf')
+require('conf.lsp-conf')
 
 -- [[ CONFIGURING NVIM-CMP ]]
-require('nvim-cmp-conf')
+require('conf.nvim-cmp-conf')
 
 -- [[ CONFIGURING ONEDARK ]]
-require('onedark-conf')
+require('conf.onedark-conf')
+
+-- [[ CONFIGURING EVERFOREST ]]
+-- require('conf.everforest-conf')
 
 -- [[ CONFIGURING NVIM-TREE ]]
-require('nvim-tree-conf')
-
+require('conf.nvim-tree-conf')
 
