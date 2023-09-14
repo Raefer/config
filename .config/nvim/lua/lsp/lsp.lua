@@ -2,7 +2,7 @@ local on_attach = require("lsp.on_attach")
 
 -- Autoinstall language servers
 require("mason-lspconfig").setup {
-  ensure_installed = { 'lua_ls', 'clangd', 'jdtls' }
+  ensure_installed = { 'lua_ls', 'clangd', 'jdtls', 'csharp_ls' }
 }
 
 -- Setup neovim lua configuration
@@ -33,6 +33,11 @@ lspconfig['clangd'].setup {
 }
 
 lspconfig['jdtls'].setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
+lspconfig['csharp_ls'].setup {
   capabilities = capabilities,
   on_attach = on_attach,
 }
