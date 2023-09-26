@@ -26,8 +26,14 @@ fi
 
 unset rc
 
-# Adding Gradle to $PATH
+# Add Gradle to $PATH
 export PATH=$PATH:/home/raefer/.gradle/gradle-8.3/bin
+
+# Add JDTLS to $PATH
+export PATH=$PATH:/home/raefer/.lspservers/jdtls/bin
+
+# Set dynamic library path
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 
 
+. "$HOME/.cargo/env"

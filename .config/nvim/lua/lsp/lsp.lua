@@ -2,7 +2,7 @@ local on_attach = require("lsp.on_attach")
 
 -- Autoinstall language servers
 require("mason-lspconfig").setup {
-  ensure_installed = { 'lua_ls', 'clangd', 'jdtls', 'csharp_ls' }
+  ensure_installed = { 'lua_ls', 'clangd', 'jdtls', 'csharp_ls', 'rust_analyzer' }
 }
 
 -- Setup neovim lua configuration
@@ -40,4 +40,16 @@ lspconfig['jdtls'].setup {
 lspconfig['csharp_ls'].setup {
   capabilities = capabilities,
   on_attach = on_attach,
+}
+
+lspconfig['rust_analyzer'].setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    ['rust-analyzer'] = {
+      diagnostics = {
+        enable = false,
+      }
+    }
+  }
 }
