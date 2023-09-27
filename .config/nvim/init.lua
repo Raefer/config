@@ -1,6 +1,6 @@
 -- Config file based off kickstart.nvim
--- PREREQUISITE : require manual installation of jdtls and add to the $PATH
--- PREREQUISITE : require manual installation of csharp_ls using dotnet
+-- PREREQUISITE (LSP) : require manual installation of jdtls and add to the $PATH
+-- PREREQUISITE (LSP) : require manual installation of csharp_ls using dotnet
 
 -- [[ VIM SETTINGS ]]
 require('options')

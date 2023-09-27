@@ -32,8 +32,16 @@ export PATH=$PATH:/home/raefer/.gradle/gradle-8.3/bin
 # Add JDTLS to $PATH
 export PATH=$PATH:/home/raefer/.lspservers/jdtls/bin
 
+# Add DOOM Emacs' bin to $PATH
+export PATH=$PATH:/home/raefer/.config/emacs/bin
+
 # Set dynamic library path
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 
-
+# Cargo
 . "$HOME/.cargo/env"
+
+# ALIAS
+alias t=tmux
+alias n=nvim
+alias q=exit
