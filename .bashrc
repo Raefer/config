@@ -27,10 +27,10 @@ fi
 unset rc
 
 # Add Gradle to $PATH
-export PATH=$PATH:/home/raefer/.gradle/gradle-8.3/bin
+export PATH=$PATH:/home/raefer/..gradle/gradle-8.3/bin
 
 # Add JDTLS to $PATH
-export PATH=$PATH:/home/raefer/.lspservers/jdtls/bin
+export PATH=$PATH:/home/raefer/..lspservers/jdtls/bin
 
 # Add DOOM Emacs' bin to $PATH
 export PATH=$PATH:/home/raefer/.config/emacs/bin
@@ -45,3 +45,6 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 alias t=tmux
 alias n=nvim
 alias q=exit
+
+# Remove VSCode's csdevkit and Library folder, cuz it's completely empty, and clutter the $HOME
+rm -rf $HOME/csdevkit $HOME/Library

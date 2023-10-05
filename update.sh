@@ -8,11 +8,12 @@ CONFIG_DIR=(
 )
 
 CONFIG_FILE=(
-    # Emacs
-    ".config/emacs/init.el"
-    ".config/emacs/early-init.el"
+    # Emacs (currently using doom emacs)
+    # ".config/emacs/init.el"
+    # ".config/emacs/early-init.el"
     # Bash
     ".bashrc"
+    ".Xresources"
 )
 
 case "$1" in

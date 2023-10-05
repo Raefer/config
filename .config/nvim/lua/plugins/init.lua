@@ -5,6 +5,12 @@ return {
   -- JDTLS
   'mfussenegger/nvim-jdtls',
 
+  -- Theme
+  'navarasu/onedark.nvim',
+  'neanias/everforest-nvim',
+  'EdenEast/nightfox.nvim',
+  "ellisonleao/gruvbox.nvim",
+
   -- LSP configuration & plugins
   {
     'neovim/nvim-lspconfig',
@@ -50,22 +56,13 @@ return {
     },
   },
 
-  -- Theme
-  {
-    'navarasu/onedark.nvim',
-    priority = 500,
-    config = function()
-      vim.cmd.colorscheme('onedark')
-    end,
-  },
-
   -- Statusline
   {
     'nvim-lualine/lualine.nvim',
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'auto',
         component_separators = '|',
         section_separators = '',
       },

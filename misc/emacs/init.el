@@ -93,3 +93,34 @@
       which-key-allow-imprecise-window-fit t
       which-key-separator " → " )
 
+;; [ MUSE ]
+(straight-use-package 'muse)
+
+;; [ IVY ]
+(straight-use-package 'ivy)
+(ivy-mode)
+(setq ivy-use-virtual-buffers t)
+(setq ivy-count-format "(%d/%d) ")
+(setq enable-recursive-minibuffers t)
+;; Setting keybinding using general.el
+(rf-leader
+  "i r" '(ivy-resume :wk "Resume the last ivy based completion"))
+
+;; [ COUNSEL ]
+(straight-use-package 'counsel)
+(counsel-mode)
+
+;; [ IVY-RICH ]
+(straight-use-package 'ivy-rich)
+(ivy-rich-mode 1)
+
+;; [ DOOM-THEMES ]
+(straight-use-package 'doom-themes)
+(require 'doom-themes)
+(load-theme 'doom-one t)
+;; Enable flashing mode-line on errors
+(doom-themes-visual-bell-config)
+;; Corrects (and improves) org-mode's native fontification.
+(doom-themes-org-config)
+
+
