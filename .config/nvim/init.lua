@@ -1,29 +1,105 @@
 -- Config file based off kickstart.nvim
--- PREREQUISITE (LSP) : require manual installation of jdtls and add to the $PATH
--- PREREQUISITE (LSP) : require manual installation of csharp_ls using dotnet
 
--- [[ VIM SETTINGS ]]
-require('options')
+-- [ VIM SETTINGS ]
+-- <space> as leader key
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+vim.o.hlsearch = false
+vim.o.number = true
+-- sync clipboard between system and neovim
+vim.o.clipboard = 'unnamedplus'
+-- save undo history
+vim.o.undofile = true
+-- searching : case insensitive search unless capitals are used
+vim.o.ignorecase = true
+vim.o.smartcase = true
+-- sign column
+vim.wo.signcolumn = 'yes'
+-- update time
+vim.o.updatetime = 250
+vim.o.timeoutlen = 500
+-- completion
+vim.o.completeopt = 'menuone,noselect'
+-- set tabstops
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.expandtab = true
+-- allow break Indent
+vim.o.breakindent = true
+-- enable mouse
+vim.o.mouse = 'a'
 
--- [[ LAZY SETUP ]]
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
-
-require("lazy").setup('plugins')
-
--- [[ CONFIG ]]
-require('config')
-
--- [[ CONFIGURING LSP ]]
+require("plugins")
 require("lsp")
+require("nvimcmp")
+require("keybindings")
 
+-- [ CONFIGURING PLUGINS ]
+require("which-key").setup()
+require("Comment").setup()
+require("nvim-tree").setup()
+
+-- onedark
+require('onedark').setup {
+    style = 'warm',
+    priority = 500,
+    config = function()
+      vim.cmd.colorscheme('onedark')
+    end,
+}
+require('onedark').load()
+
+-- lualine
+require("lualine").setup({
+  options = {
+    icons_enabled = false,
+    theme = "auto",
+    component_separators = "|",
+    section_separators = "",
+  },
+})
+
+-- indent_blankline
+require("indent_blankline").setup({
+  char = "|",
+  -- char = "┊",
+  show_end_of_line = true,
+  show_trailing_blankline_indent = false,
+})
+
+-- gitsigns
+require("gitsigns").setup({
+  signs = {
+    add = { text = "+" },
+    change = { text = "~" },
+    delete = { text = "_" },
+    topdelete = { text = "‾" },
+    changedelete = { text = "~" },
+  },
+})
+
+-- telescope
+require('telescope').setup {
+  defaults = {
+    mappings = {
+      i = {
+        ['<C-u>'] = false,
+        ['<C-d>'] = false,
+      },
+    },
+  },
+}
+-- Enable telescope fzf native, if installed
+pcall(require('telescope').load_extension, 'fzf')
+
+-- treesitter
+require('nvim-treesitter.configs').setup {
+  ensure_installed = {
+    'c', 'cpp', 'lua', 'python', 'rust', 'typescript', 'vimdoc', 'vim', 'java', 'c_sharp', 'groovy', },
+  ignore_install = {},
+  auto_install = false,
+  sync_install = false,
+  modules = {},
+  highlight = { enable = true },
+  indent = { enable = true },
+}

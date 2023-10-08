@@ -5,15 +5,11 @@ CONFIG_DIR=(
     "nvim"
     "tmux"
     "alacritty"
+    "doom"
 )
 
 CONFIG_FILE=(
-    # Emacs (currently using doom emacs)
-    # ".config/emacs/init.el"
-    # ".config/emacs/early-init.el"
-    # Bash
     ".bashrc"
-    ".Xresources"
 )
 
 case "$1" in
