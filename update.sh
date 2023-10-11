@@ -5,7 +5,6 @@ CONFIG_DIR=(
     "nvim"
     "tmux"
     "alacritty"
-    "doom"
 )
 
 CONFIG_FILE=(

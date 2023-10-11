@@ -29,9 +29,6 @@ unset rc
 # Add Gradle to $PATH
 export PATH=$PATH:/home/raefer/..gradle/gradle-8.3/bin
 
-# Add DOOM Emacs' bin to $PATH
-export PATH=$PATH:/home/raefer/.config/emacs/bin
-
 # Set dynamic library path
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 
@@ -45,11 +42,11 @@ alias q=exit
 # standard util replacement
 alias ls=exa
 alias cat=bat
-# help page
-alias he="nvim ~/notes/help/emacs"
 # config page
 alias cn="nvim ~/.config/nvim/"
-alias ce="nvim ~/.config/emacs"
+# Neorg
+alias journal="nvim -c \"Neorg journal today\""
+alias notes="nvim -c \"Neorg workspace notes\""
 
 # Remove VSCode's csdevkit and Library folder, cuz it's completely empty, and clutter the $HOME
 rm -rf $HOME/csdevkit $HOME/Library

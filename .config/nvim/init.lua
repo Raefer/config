@@ -3,7 +3,7 @@
 -- [ VIM SETTINGS ]
 -- <space> as leader key
 vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.maplocalleader = ','
 vim.o.hlsearch = false
 vim.o.number = true
 -- sync clipboard between system and neovim
@@ -38,14 +38,15 @@ require("keybindings")
 require("which-key").setup()
 require("Comment").setup()
 require("nvim-tree").setup()
+require("ibl").setup()
 
 -- onedark
 require('onedark').setup {
-    style = 'warm',
-    priority = 500,
-    config = function()
-      vim.cmd.colorscheme('onedark')
-    end,
+  style = 'warm',
+  priority = 500,
+  config = function()
+    vim.cmd.colorscheme('onedark')
+  end,
 }
 require('onedark').load()
 
@@ -57,14 +58,6 @@ require("lualine").setup({
     component_separators = "|",
     section_separators = "",
   },
-})
-
--- indent_blankline
-require("indent_blankline").setup({
-  char = "|",
-  -- char = "┊",
-  show_end_of_line = true,
-  show_trailing_blankline_indent = false,
 })
 
 -- gitsigns
@@ -102,4 +95,31 @@ require('nvim-treesitter.configs').setup {
   modules = {},
   highlight = { enable = true },
   indent = { enable = true },
+}
+
+-- neorg
+require('neorg').setup {
+  load = {
+    ["core.defaults"] = {},
+    ["core.concealer"] = {
+      config = {
+        folds = false,
+      }
+    },
+    ["core.itero"] = {},
+    ["core.qol.toc"] = {},
+    ["core.journal"] = {
+      config = {
+        journal_folder = "~/norg/journal/",
+        strategy = "flat",
+      }
+    },
+    ["core.dirman"] = {
+      config = {
+        workspaces = {
+          notes = "~/norg/notes/",
+        },
+      }
+    }
+  }
 }

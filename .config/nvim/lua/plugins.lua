@@ -23,6 +23,12 @@ require("lazy").setup({
   "navarasu/onedark.nvim",
 
   {
+    "nvim-neorg/neorg",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    build = ":Neorg sync-parsers",
+  },
+
+  {
     "neovim/nvim-lspconfig",
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
