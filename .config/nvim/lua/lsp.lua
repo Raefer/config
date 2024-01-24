@@ -26,7 +26,7 @@ end
 
 -- Autoinstall language servers
 require("mason-lspconfig").setup {
-  ensure_installed = { 'lua_ls', 'clangd', 'rust_analyzer', }
+  ensure_installed = { 'lua_ls', 'clangd', 'rust_analyzer', 'bashls', }
 }
 
 -- Setup neovim lua configuration
@@ -67,3 +67,7 @@ lspconfig['rust_analyzer'].setup {
   }
 }
 
+lspconfig['bashls'].setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+}

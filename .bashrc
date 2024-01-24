@@ -32,6 +32,10 @@ export PATH=$PATH:/home/raefer/..gradle/gradle-8.3/bin
 # Set dynamic library path
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 
+# Custom Directory
+export STORAGE=/mnt/storage/Storage/
+export PHOTO=/home/raefer/Photographs/
+
 # Cargo
 . "$HOME/.cargo/env"
 
@@ -39,14 +43,13 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 alias t=tmux
 alias n=nvim
 alias q=exit
+alias f=firefox
 # standard util replacement
 alias ls=exa
+alias lst="exa -lT"
 alias cat=bat
 # config page
 alias cn="nvim ~/.config/nvim/"
-# Neorg
-alias journal="nvim -c \"Neorg journal today\""
-alias notes="nvim -c \"Neorg workspace notes\""
 
-# Remove VSCode's csdevkit and Library folder, cuz it's completely empty, and clutter the $HOME
+# Remove VSCode's csdevkit and Library folder, cuz it's completely empty, don't know what they do, and clutter the $HOME
 rm -rf $HOME/csdevkit $HOME/Library

@@ -21,6 +21,13 @@ require("lazy").setup({
   "nvim-tree/nvim-tree.lua",
   "tpope/vim-sleuth",
   "navarasu/onedark.nvim",
+  "dhruvasagar/vim-table-mode",
+  "preservim/vim-pencil",
+
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+  },
 
   {
     "nvim-neorg/neorg",

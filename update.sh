@@ -32,7 +32,7 @@ case "$1" in
             rmdir $FILE
             cp -r ~/$FILE ./$FILE
         done
-    ;;
+        ;;
     restore)
         for DIR in ${CONFIG_DIR[@]}; do 
             LOC=$DIR_PATH$DIR
@@ -53,8 +53,8 @@ case "$1" in
             rmdir ~/$FILE
             cp -r ./$FILE ~/$FILE
         done
-    ;;
+        ;;
     *)
         echo Error : Invalid argument / No argument provided.
-    ;;
+        ;;
 esac

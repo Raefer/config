@@ -28,7 +28,10 @@ vim.o.expandtab = true
 vim.o.breakindent = true
 -- enable mouse
 vim.o.mouse = 'a'
+-- load legacy settings
+vim.cmd("so ~/.config/nvim/legacy.vim")
 
+-- [ PLUGINS ]
 require("plugins")
 require("lsp")
 require("nvimcmp")
@@ -42,6 +45,13 @@ require("ibl").setup()
 
 -- onedark
 require('onedark').setup {
+  colors = {
+    bg0 = '#303030',
+  },
+  term_colors = false,
+  code_style = {
+    parameter = 'italic'
+  },
   style = 'warm',
   priority = 500,
   config = function()
@@ -108,18 +118,36 @@ require('neorg').setup {
     },
     ["core.itero"] = {},
     ["core.qol.toc"] = {},
-    ["core.journal"] = {
-      config = {
-        journal_folder = "~/norg/journal/",
-        strategy = "flat",
-      }
+    -- ["core.journal"] = {
+    --   config = {
+    --     journal_folder = "norg/journal/",
+    --     strategy = "flat",
+    --   }
+    -- },
+    -- ["core.dirman"] = {
+    --   config = {
+    --     workspaces = {
+    --       notes = "~/norg/notes/",
+    --     },
+    --   }
+    -- }
+  },
+}
+
+-- todo-comment
+require("todo-comments").setup {
+  config = {
+    signs = false,
+    highlight = {
+      comments_only = false,
     },
-    ["core.dirman"] = {
-      config = {
-        workspaces = {
-          notes = "~/norg/notes/",
-        },
-      }
-    }
-  }
+    colors = {
+      error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
+      warning = { "DiagnosticWarn", "WarningMsg", "#FBBF24" },
+      info = { "DiagnosticInfo", "#2563EB" },
+      hint = { "DiagnosticHint", "#10B981" },
+      default = { "Identifier", "#7C3AED" },
+      test = { "Identifier", "#FF00FF" }
+    },
+  },
 }
