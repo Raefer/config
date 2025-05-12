@@ -1,0 +1,51 @@
+# import = [ "~/.config/alacritty/nordfox.toml" ]
+
+[general]
+live_config_reload = true
+
+[env]
+TERM = "xterm-256color"
+
+[window]
+# padding = { x = 4, y = 4 }
+dynamic_padding = true
+title = "Terminal"
+dynamic_title = false
+decorations_theme_variant = "Dark"
+resize_increments = false
+
+[scrolling]
+history = 32768
+multiplier = 4
+
+[font]
+normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
+size = 11
+
+[colors]
+primary = { background = "#333333" , foreground = "#BFBFBF"}
+
+[bell]
+# Nothing
+
+[selection]
+save_to_clipboard = true
+
+[cursor]
+style = { shape = "Block", blinking = "Never" }
+unfocused_hollow = true
+
+[terminal]
+# Nothing
+
+[mouse]
+hide_when_typing = true
+
+[hints]
+# Nothing
+
+[keyboard]
+# Nothing
+
+[debug]
+

@@ -1,0 +1,70 @@
+// -*- mode: jsonc -*-
+{
+    "height": 25,
+    "spacing": 0,
+    "reload_style_on_change": true,
+    // Modules order
+    "modules-left": [
+        "sway/workspaces"
+    ],
+    "modules-center": [
+        "sway/window"
+    ],
+    "modules-right": [
+        "tray",
+        "battery",
+        "clock"
+    ],
+    // Modules configuration
+    "sway/workspaces": {
+        "format": "{name}"
+    },
+    "tray": {
+        "icon-size": 20,
+        "show-passive-items": true,
+        "spacing": 10
+    },
+    "clock": {
+        "interval": 5,
+        "format": "{:%Y-%m-%d (%A) %H:%M:%S (%Z)}",
+        "timezones": [
+            "Australia/West",
+            "Europe/Berlin",
+            "US/Eastern",
+            "US/Pacific"
+        ],
+        "tooltip-format": "<span size='10pt' font='JetBrainsMono Nerd Font'>{tz_list}\n{calendar}</span>",
+        "calendar": {
+            "mode": "year",
+            "mode-mon-col": 3,
+            "weeks-pos": "left",
+            // TODO: Change the color theme later
+            "format": {
+                "months": "<span color='#ffead3'><b>{}</b></span>",
+                "days": "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+                "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+                "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        }
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-full": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
+        "tooltip": true,
+        "tooltip-format": "{power}, Status: {timeTo}"
+    }
+}

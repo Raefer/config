@@ -1,0 +1,198 @@
+font pango:JetBrainsMono Nerd Font 11
+title_align center
+
+default_border pixel 2
+default_floating_border pixel 2
+
+set $Fg #BFBFBF
+
+set $Color1 #6699CC
+set $Color2 #666666
+set $Color3 #666666
+set $Color4 #CC2929
+set $Color5 #1A1A1A
+
+# class                 border  backgr. text indicator child_border
+client.focused          $Color1 $Color1 $Fg  $Color1   $Color1
+client.focused_inactive $Color2 $Color2 $Fg  $Color2   $Color2
+client.unfocused        $Color3 $Color3 $Fg  $Color3   $Color3
+client.urgent           $Color4 $Color4 $Fg  $Color4   $Color4
+client.placeholder      $Color5 $Color5 $Fg  $Color5   $Color5
+
+client.background       #E6E6E6
+
+gaps inner 10px
+gaps outer 5px
+
+################################################################################
+
+### autoexec
+# exec_always waybar
+exec waybar
+exec fcitx5
+output * bg #000000 solid_color
+
+### variables
+set $Mod Mod4
+set $L h
+set $D j
+set $U k
+set $R l
+
+set $Term "kitty --title Terminal"
+set $Browser "firefox"
+set $FM "pcmanfm"
+set $App "spotify-launcher & telegram-desktop"
+set $Menu "wofi --show drun"
+
+# requires screenshot.sh
+# set $SSA 
+# set $SSL 
+# set $SSC 
+# set $SSR 
+
+### output configuration
+# output HDMI-A-1 resolution 2560x1440 position 0,0
+output DP-1 resolution 2560x1440 position 0,0
+output DP-2 resolution 2560x1440 position 2560,0
+
+# default workspaces per monitor
+# workspace name will be handled by waybar
+workspace 1 output DP-1
+workspace 3 output DP-1
+workspace 5 output DP-1
+workspace 7 output DP-1
+workspace 2 output DP-2
+workspace 4 output DP-2
+workspace 6 output DP-2
+workspace 8 output DP-2
+# workspace number 1 output HDMI-A-1
+# workspace number 2 output DP-1
+# workspace number 3 output DP-1
+# workspace number 4 output HDMI-A-1
+
+# focus on the main monitor
+# focus output HDMI-A-1
+focus output DP-1
+
+################################################################################
+
+# per program condition
+# feh
+for_window [class="feh"] floating enable
+assign [class="feh"] number 1
+
+# vlc
+assign [class="vlc"] number 2
+
+# qalculate
+for_window [app_id="qalculate-gtk"] floating enable
+
+# anki
+for_window [class="Anki"] floating enable
+assign [class="Anki"] number 1
+
+# daggerfall unity
+assign [class="DaggerfallUnity.x86_64"] number 1
+
+assign [class="steam_app_*"] number 1
+
+################################################################################
+
+### key bindings
+#
+# windows:
+#
+    # terminal
+    bindsym $Mod+return exec $Term
+    # browser
+    bindsym $Mod+backspace exec $Browser
+    # file manager
+    bindsym $Mod+e exec $FM
+    # misc apps
+    # bindsym $Mod+t exec $App
+    # launcher
+    bindsym $Mod+d exec $Menu
+    # fullscreen
+    bindsym $Mod+f fullscreen
+    # kill window
+    bindsym $Mod+x kill
+
+    # move focus
+    bindsym $Mod+$L focus left
+    bindsym $Mod+$D focus down
+    bindsym $Mod+$U focus up
+    bindsym $Mod+$R focus right
+
+    # move window
+    bindsym $Mod+shift+$L move left
+    bindsym $Mod+shift+$D move down
+    bindsym $Mod+shift+$U move up
+    bindsym $Mod+shift+$R move right
+
+    # resize window
+    bindsym $Mod+ctrl+$L resize shrink width 40px
+    bindsym $Mod+ctrl+$D resize grow height 40px
+    bindsym $Mod+ctrl+$U resize shrink height 40px
+    bindsym $Mod+ctrl+$R resize grow width 40px
+#
+# workspaces:
+#
+    # switch to workspace
+    bindsym $Mod+1 workspace number 1
+    bindsym $Mod+2 workspace number 2
+    bindsym $Mod+3 workspace number 3
+    bindsym $Mod+4 workspace number 4
+    bindsym $Mod+5 workspace number 5
+    bindsym $Mod+6 workspace number 6
+    bindsym $Mod+7 workspace number 7
+    bindsym $Mod+8 workspace number 8
+    bindsym $Mod+9 workspace number 9
+
+    # move focused container to workspace
+    bindsym $Mod+ctrl+1 move container to workspace number 1
+    bindsym $Mod+ctrl+2 move container to workspace number 2
+    bindsym $Mod+ctrl+3 move container to workspace number 3
+    bindsym $Mod+ctrl+4 move container to workspace number 4
+    bindsym $Mod+ctrl+5 move container to workspace number 5
+    bindsym $Mod+ctrl+6 move container to workspace number 6
+    bindsym $Mod+ctrl+7 move container to workspace number 7
+    bindsym $Mod+ctrl+8 move container to workspace number 8
+    bindsym $Mod+ctrl+9 move container to workspace number 9
+#
+# window manager:
+#
+    # reload window manager
+    bindsym $Mod+r reload
+
+    # kill window manager
+    bindsym $Mod+m exec swaymsg exit
+#
+# manual tiler:
+#
+    # split vertically
+    bindsym $Mod+v splith
+
+    # split horizontally
+    bindsym $Mod+b splitv
+#
+# floating windows:
+#
+    # toggle floating mode
+    bindsym $Mod+shift+space floating toggle
+
+    # toggle focus between the tiling area and the floating area
+    bindsym $Mod+space focus mode_toggle
+
+    # MOD+LMB to move, MOD+RMB to resize
+    floating_modifier $Mod normal
+#
+# screrenshots
+#
+    bindsym $Mod+u exec "screenshot.sh all"
+    bindsym $Mod+i exec "screenshot.sh left"
+    bindsym $Mod+o exec "screenshot.sh center"
+    bindsym $Mod+p exec "screenshot.sh right"
+#
+
+include /etc/sway/config.d/*
