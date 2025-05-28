@@ -90,11 +90,13 @@ for_window [app_id="qalculate-gtk"] floating enable
 
 # anki
 for_window [class="Anki"] floating enable
-assign [class="Anki"] number 1
+# assign [class="Anki"] number 1
 
 # daggerfall unity
 assign [class="DaggerfallUnity.x86_64"] number 1
 
+# steam
+assign [class="steam"] number 1
 assign [class="steam_app_*"] number 1
 
 ################################################################################

@@ -5,13 +5,19 @@
         gh 		# github cli tool
         git		# version control
         gnumake	# make tool
-        neovim 	# editor
         ntfs3g  # ntfs utility
         tmux	# terminal multiplexer
         wget    # get
+
+        # Neovim
+        neovim
+        # image support
+        imagemagick
         # LSPs
-        bash-language-server
         lua-language-server
+        bash-language-server
+        # FMT
+        stylua
     ];
 
     programs.neovim = {

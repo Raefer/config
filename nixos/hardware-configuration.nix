@@ -14,14 +14,8 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/31216e3b-46ec-4a1f-91bb-73ae38c06c0e";
+    { device = "/dev/disk/by-uuid/4c677ac3-2231-4305-8770-e6861f42b72c";
       fsType = "ext4";
-    };
-
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/F5C9-4499";
-      fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
     };
 
   fileSystems."/stg" =
@@ -31,6 +25,32 @@
 
   fileSystems."/bak" =
     { device = "/dev/disk/by-uuid/a8bf8cfa-c78d-4470-b340-7d7fe39e0348";
+      fsType = "ext4";
+    };
+
+  fileSystems."/home" =
+    { device = "/dev/disk/by-uuid/a61a5f82-5baa-4544-b0a0-10a801f54fd0";
+      fsType = "ext4";
+    };
+
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/5570-ADD7";
+      fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
+    };
+
+  fileSystems."/tmp" =
+    { device = "/dev/disk/by-uuid/b7ff57c4-7c4d-4154-afe8-65bf6e1358d8";
+      fsType = "ext4";
+    };
+
+  fileSystems."/var" =
+    { device = "/dev/disk/by-uuid/df51fbc7-3c47-47f4-a0d7-d7edda6f9b1c";
+      fsType = "ext4";
+    };
+
+  fileSystems."/var/log" =
+    { device = "/dev/disk/by-uuid/5e1a64e7-7f09-4f68-82d3-c5ae68254fcd";
       fsType = "ext4";
     };
 

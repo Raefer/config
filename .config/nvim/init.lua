@@ -1,61 +1,56 @@
--- Leader Key
+-- leader key
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Disable Netrw
+-- disable netrw
 vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrwplugin = 1
 
--- Disable Fold
+-- nerd font
 --vim.opt.nofoldenable = true
-
--- Nerd Font
 vim.g.have_nerd_font = true
 
--- System
+-- system
 vim.opt.clipboard = "unnamedplus" -- clipboard
 vim.opt.mouse = "a" -- mouse support
 vim.opt.undofile = true -- undo history
 
--- Update Time
+-- update time
 vim.opt.timeoutlen = 250
 vim.opt.updatetime = 250
 
--- New Split Behavior
+-- new split behavior
 vim.opt.splitbelow = false
 vim.opt.splitright = false
 
--- Indentation
+-- indentation
 vim.opt.autoindent = true -- auto indent the next line
 vim.opt.expandtab = true -- convert tabs to spaces
 vim.opt.shiftwidth = 4 -- set the number of spaces for each step of indent
-vim.opt.softtabstop = 4 -- set the amount of spaces to be affected with the <Tab> or <BS> character
-vim.opt.tabstop = 4 -- set the width of the <Tab> character
+vim.opt.softtabstop = 4 -- set the amount of spaces to be affected with the <tab> or <bs> character
+vim.opt.tabstop = 4 -- set the width of the <tab> character
 
--- Search Options
+-- search options
 vim.opt.hlsearch = false
 vim.opt.ignorecase = true
 vim.opt.incsearch = true
 vim.opt.smartcase = true
 
--- Text Rendering
+-- text rendering
 vim.opt.breakindent = true -- keep the wrapped line visually indented
 vim.opt.linebreak = true -- avoid wrapping a line in the middle of a word
 vim.opt.scrolloff = 5 -- number of lines to keep above and below the cursor
 vim.opt.sidescrolloff = 5 -- number of columns to keep to the left and right of the cursor
 vim.opt.wrap = true -- allow line wrapping
 
--- UI
+-- ui
 vim.opt.colorcolumn = ""
 vim.opt.cursorline = false
 vim.opt.inccommand = "split" -- incrementally show command effect
 vim.opt.number = true
 vim.opt.showmode = false -- disable mode display, since the status line already displayed it
 vim.opt.signcolumn = "yes"
-vim.opt.termguicolors = true -- enable 24-bit color in the TUI
-
--- Legacy Settings
-vim.cmd("so ~/.config/nvim/legacy.vim")
+vim.opt.termguicolors = true -- enable 24-bit color in the tui
 
 --- Add a new mapping
 ---@param keys string Keymap
@@ -72,12 +67,9 @@ function Map(keys, name, desc, func, bufr, mode)
 	vim.keymap.set(mode, keys, func, (bufr and { buffer = bufr, desc = description } or { desc = description }))
 end
 
--- Lazy
--- Bootstrap
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+-- lazy.nvim
 
--- TODO: Keep an eye on the official installation guide
--- check if they've updated the vim.loop situation
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
 	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
@@ -95,15 +87,12 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugin_list = require("plugin-list")
 
--- Setup
 require("lazy").setup({
 	spec = { plugin_list },
 	install = { missing = true },
 	-- checker = { enabled = true }, -- check updates for plugins
 })
 
-require("plugin")
+-- plugins
 
--- Theme
--- require("theme.nightfox")
-require("theme.onedark")
+require("config")

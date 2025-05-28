@@ -30,6 +30,7 @@
             ls = "eza --color=always --header --group";
             cat = "bat";
             htop = "btop";
+            nvim-old-config = "NVIM_APPNAME=nvim-old-config nvim";
         };
 
         loginShellInit = ''

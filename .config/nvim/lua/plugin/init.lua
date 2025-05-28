@@ -1,8 +1,0 @@
-require("plugin.conform")
--- require("plugin.mason-lspconfig")
-require("plugin.neorg")
-require("plugin.nvim-tree")
-require("plugin.nvim-treesitter")
-require("plugin.telescope")
-require("plugin.todo-comments")
-require("plugin.nvim-cmp")

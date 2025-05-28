@@ -1,0 +1,7 @@
+require("config.documents")
+require("config.explorer")
+require("config.indicator")
+require("config.lsp")
+require("config.telescope")
+require("config.theme")
+require("config.snippets")

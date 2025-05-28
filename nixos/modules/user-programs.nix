@@ -17,6 +17,7 @@
         unzip       # unzip
         yazi        # terminal file manager
         yt-dlp      # youtube video download
+        zip         # zip
 
         # Dependencies
         file                # file type viewer, dependency for yazi
@@ -27,6 +28,7 @@
 
         # Basic Programs
         kitty       # terminal emulator
+        krusader    # dual-pane file manager
         pcmanfm     # file manager
         vlc		    # media player
 
@@ -36,17 +38,22 @@
         libreoffice         # office suite
         qalculate-gtk       # calculator
         telegram-desktop	# telegram
+        zathura             # pdf viewer
 
         # Creative Programs
         darktable	# non-destructive photo editor
+        inkscape    # vector graphic editor
         krita       # painting application
 
         # Security
+        chkrootkit  # rootkit checker
         lynis       # security auditing tool
-        ossec-agent # intrusion detection system
 
         # Dependencies
         mplayer     # media player, dependency for anki-bin
+        kdiff3      # diff utility, dependency for krusader
+        krename     # rename utility, dependency for krusader
+        gamemode    # optimize performance for games, dependency for steam
         hunspell    # spellchecker and dictionaries, dependency for libreoffice
         hunspellDicts.en_US
         hunspellDicts.en_CA

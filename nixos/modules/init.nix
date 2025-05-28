@@ -5,6 +5,8 @@
         ./compositor.nix
         ./development.nix
         ./language.nix
+        ./latex.nix
+        ./security.nix
         ./user-programs.nix
     ];
 }
