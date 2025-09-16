@@ -4,6 +4,8 @@ title_align center
 default_border pixel 2
 default_floating_border pixel 2
 
+xwayland enable
+
 set $Fg #BFBFBF
 
 set $Color1 #6699CC
@@ -29,7 +31,10 @@ gaps outer 5px
 ### autoexec
 # exec_always waybar
 exec waybar
+exec Telegram -startintray
 exec fcitx5
+exec opensnitch-ui
+exec steam -silent
 output * bg #000000 solid_color
 
 ### variables
@@ -39,22 +44,19 @@ set $D j
 set $U k
 set $R l
 
-set $Term "kitty --title Terminal"
 set $Browser "firefox"
-set $FM "pcmanfm"
-set $App "spotify-launcher & telegram-desktop"
 set $Menu "wofi --show drun"
+set $Term "kitty --title Terminal"
 
-# requires screenshot.sh
-# set $SSA 
-# set $SSL 
-# set $SSC 
-# set $SSR 
+set $Term-dropdown "kitty --title 'Dropdown Terminal' --session ~/.config/sway/kitty-sessions/drop-down"
+
+set $FM-GUI "pcmanfm"
+set $FM-TUI "kitty --title Terminal --session ~/.config/sway/kitty-sessions/tui-fm"
 
 ### output configuration
-# output HDMI-A-1 resolution 2560x1440 position 0,0
 output DP-1 resolution 2560x1440 position 0,0
-output DP-2 resolution 2560x1440 position 2560,0
+output HDMI-A-1 resolution 2560x1440 position 2560,0
+output DP-2 resolution 2560x1440 position 5120,0
 
 # default workspaces per monitor
 # workspace name will be handled by waybar
@@ -62,14 +64,14 @@ workspace 1 output DP-1
 workspace 3 output DP-1
 workspace 5 output DP-1
 workspace 7 output DP-1
-workspace 2 output DP-2
-workspace 4 output DP-2
-workspace 6 output DP-2
-workspace 8 output DP-2
-# workspace number 1 output HDMI-A-1
-# workspace number 2 output DP-1
-# workspace number 3 output DP-1
-# workspace number 4 output HDMI-A-1
+
+workspace 2 output HDMI-A-1
+workspace 4 output HDMI-A-1
+workspace 6 output HDMI-A-1
+workspace 8 output HDMI-A-1
+
+workspace 9 output DP-2
+workspace 0 output DP-2
 
 # focus on the main monitor
 # focus output HDMI-A-1
@@ -78,41 +80,38 @@ focus output DP-1
 ################################################################################
 
 # per program condition
-# feh
-for_window [class="feh"] floating enable
-assign [class="feh"] number 1
-
-# vlc
-assign [class="vlc"] number 2
-
-# qalculate
+for_window [app_id="dropdown-terminal"] floating enable, resize set 960 360
+for_window [app_id="opensnitch_ui"] floating enable
+# for_window [app_id="org.prismlauncher.PrismLauncher"] floating enable
 for_window [app_id="qalculate-gtk"] floating enable
-
-# anki
 for_window [class="Anki"] floating enable
+for_window [class="feh"] floating enable
+
+# assign [class="feh"] number 1
 # assign [class="Anki"] number 1
-
-# daggerfall unity
-assign [class="DaggerfallUnity.x86_64"] number 1
-
-# steam
-assign [class="steam"] number 1
+# assign [class="steam"] number 1
 assign [class="steam_app_*"] number 1
+assign [class="DaggerfallUnity.x86_64"] number 1
 
 ################################################################################
 
 ### key bindings
 #
-# windows:
+# programs:
 #
     # terminal
     bindsym $Mod+return exec $Term
+    bindsym $Mod+t exec $Term-dropdown
     # browser
     bindsym $Mod+backspace exec $Browser
     # file manager
-    bindsym $Mod+e exec $FM
-    # misc apps
-    # bindsym $Mod+t exec $App
+    # bindsym $Mod+e exec $FM-GUI
+    # bindsym $Mod+shift+e exec $FM-TUI
+    # programs
+    # bindsym $Mod+s exec steam
+#
+# windows:
+#
     # launcher
     bindsym $Mod+d exec $Menu
     # fullscreen
@@ -133,10 +132,10 @@ assign [class="steam_app_*"] number 1
     bindsym $Mod+shift+$R move right
 
     # resize window
-    bindsym $Mod+ctrl+$L resize shrink width 40px
-    bindsym $Mod+ctrl+$D resize grow height 40px
+    bindsym $Mod+ctrl+$L resize shrink width  40px
+    bindsym $Mod+ctrl+$D resize grow   height 40px
     bindsym $Mod+ctrl+$U resize shrink height 40px
-    bindsym $Mod+ctrl+$R resize grow width 40px
+    bindsym $Mod+ctrl+$R resize grow   width  40px
 #
 # workspaces:
 #
@@ -152,15 +151,15 @@ assign [class="steam_app_*"] number 1
     bindsym $Mod+9 workspace number 9
 
     # move focused container to workspace
-    bindsym $Mod+ctrl+1 move container to workspace number 1
-    bindsym $Mod+ctrl+2 move container to workspace number 2
-    bindsym $Mod+ctrl+3 move container to workspace number 3
-    bindsym $Mod+ctrl+4 move container to workspace number 4
-    bindsym $Mod+ctrl+5 move container to workspace number 5
-    bindsym $Mod+ctrl+6 move container to workspace number 6
-    bindsym $Mod+ctrl+7 move container to workspace number 7
-    bindsym $Mod+ctrl+8 move container to workspace number 8
-    bindsym $Mod+ctrl+9 move container to workspace number 9
+    bindsym $Mod+shift+1 move container to workspace number 1
+    bindsym $Mod+shift+2 move container to workspace number 2
+    bindsym $Mod+shift+3 move container to workspace number 3
+    bindsym $Mod+shift+4 move container to workspace number 4
+    bindsym $Mod+shift+5 move container to workspace number 5
+    bindsym $Mod+shift+6 move container to workspace number 6
+    bindsym $Mod+shift+7 move container to workspace number 7
+    bindsym $Mod+shift+8 move container to workspace number 8
+    bindsym $Mod+shift+9 move container to workspace number 9
 #
 # window manager:
 #
@@ -191,8 +190,7 @@ assign [class="steam_app_*"] number 1
 #
 # screrenshots
 #
-    bindsym $Mod+u exec "screenshot.sh all"
-    bindsym $Mod+i exec "screenshot.sh left"
+    bindsym $Mod+i exec "screenshot.sh all"
     bindsym $Mod+o exec "screenshot.sh center"
     bindsym $Mod+p exec "screenshot.sh right"
 #

@@ -69,9 +69,138 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
+-- formatter
+
+require("conform").setup({
+	-- formatter needs to be manually downloaded
+	formatters_by_ft = {
+		lua = { "stylua" },
+		tex = { "latexindent" },
+	},
+	format_on_save = function(bufnr)
+		-- local disable_filetypes = { c = true, cpp = true }
+		local disable_filetypes = {}
+		local lsp_format_opt
+		if disable_filetypes[vim.bo[bufnr].filetype] then
+			lsp_format_opt = "never"
+		else
+			lsp_format_opt = "fallback"
+		end
+
+		return {
+			timeout_ms = 500,
+			lsp_format = lsp_format_opt,
+		}
+	end,
+})
+
+local name = "Conform"
+
+Map("<leader>f", name, "[F]ormat buffer", function()
+	require("conform").format({ async = true, lsp_format = "fallback" })
+end, nil, { "n", "v" })
+
+-- completion
+
+local cmp = require("cmp")
+local luasnip = require("luasnip")
+local select_opts = { behavior = cmp.SelectBehavior.Select }
+
+-- settings from https://vonheikemen.github.io/devlog/tools/setup-nvim-lspconfig-plus-nvim-cmp/
+cmp.setup({
+	snippet = {
+		expand = function(args)
+			require("luasnip").lsp_expand(args.body)
+		end,
+	},
+	mapping = cmp.mapping.preset.insert({
+		["<C-e>"] = cmp.mapping.abort(),
+		["<C-z>"] = cmp.mapping.confirm({ select = true }),
+		["<C-_>"] = cmp.mapping.confirm({ select = true }),
+		["<CR>"] = cmp.mapping.confirm({ select = false }),
+
+		["<C-n>"] = cmp.mapping(function(fallback)
+			if luasnip.jumpable(1) then
+				luasnip.jump(1)
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+
+		["<C-p>"] = cmp.mapping(function(fallback)
+			if luasnip.jumpable(-1) then
+				luasnip.jump(-1)
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+
+		["<Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item(select_opts)
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+
+		["<S-Tab>"] = cmp.mapping(function(fallback)
+			local col = vim.fn.col(".") - 1
+
+			if cmp.visible() then
+				cmp.select_prev_item(select_opts)
+			elseif col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
+				fallback()
+			else
+				cmp.complete()
+			end
+		end, { "i", "s" }),
+
+		-- ["<Tab>"] = cmp.mapping.select_next_item(),
+		-- ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+		-- ["<C-e>"] = cmp.mapping.abort(),
+		-- ["<CR>"] = cmp.mapping.confirm({
+		-- 	select = true, -- whether an item needs to be selected to autocomplete
+		-- 	behavior = cmp.ConfirmBehavior.Insert,
+		-- }),
+		-- ["<C-n>"] = cmp.mapping(function(fallback)
+		-- 	if luasnip.jumpable(1) then
+		-- 		luasnip.jump(1)
+		-- 	else
+		-- 		fallback()
+		-- 	end
+		-- end, { "i", "s" }),
+		-- ["<C-p>"] = cmp.mapping(function(fallback)
+		-- 	if luasnip.jumpable(-1) then
+		-- 		luasnip.jump(-1)
+		-- 	else
+		-- 		fallback()
+		-- 	end
+		-- end, { "i", "s" }),
+	}),
+	sources = cmp.config.sources({
+		{ name = "nvim_lsp" },
+		{ name = "luasnip" },
+		-- { name = "buffer" },
+		{ name = "path" },
+	}),
+})
+
 -- lspconfig
 
+require("mason-lspconfig").setup({
+	automatic_enable = false,
+	ensure_installed = {
+		"clangd", -- c
+		"lua_ls", -- lua
+		"texlab", -- tex
+	},
+})
+
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+require("lspconfig")["clangd"].setup({
+	capabilities = capabilities,
+})
 
 require("lspconfig")["lua_ls"].setup({
 	-- settings from https://lsp-zero.netlify.app/docs/guide/neovim-lua-ls.html
@@ -117,80 +246,4 @@ require("lspconfig")["lua_ls"].setup({
 
 require("lspconfig")["texlab"].setup({
 	capabilities = capabilities,
-})
-
--- formatter
-
-require("conform").setup({
-	-- formatter needs to be manually downloaded
-	formatters_by_ft = {
-		lua = { "stylua" },
-	},
-	format_on_save = function(bufnr)
-		-- local disable_filetypes = { c = true, cpp = true }
-		local disable_filetypes = {}
-		local lsp_format_opt
-		if disable_filetypes[vim.bo[bufnr].filetype] then
-			lsp_format_opt = "never"
-		else
-			lsp_format_opt = "fallback"
-		end
-
-		return {
-			timeout_ms = 500,
-			lsp_format = lsp_format_opt,
-		}
-	end,
-})
-
-local name = "Conform"
-
-Map("<leader>f", name, "[F]ormat buffer", function()
-	require("conform").format({ async = true, lsp_format = "fallback" })
-end, nil, { "n", "v" })
-
--- completion
-
-local cmp = require("cmp")
-local luasnip = require("luasnip")
-
--- settings from https://vonheikemen.github.io/devlog/tools/setup-nvim-lspconfig-plus-nvim-cmp/
-cmp.setup({
-	snippet = {
-		expand = function(args)
-			require("luasnip").lsp_expand(args.body)
-		end,
-	},
-	mapping = cmp.mapping.preset.insert({
-		["<C-n>"] = cmp.mapping.select_next_item(),
-		["<C-p>"] = cmp.mapping.select_prev_item(),
-		["<C-e>"] = cmp.mapping.abort(),
-		["<CR>"] = cmp.mapping.confirm({
-			select = true, -- whether an item needs to be selected to autocomplete
-			behavior = cmp.ConfirmBehavior.Insert,
-		}),
-		-- ["<Tab>"] = cmp.mapping.select_next_item(),
-		-- ["<S-Tab>"] = cmp.mapping.select_prev_item(),
-		["<Tab>"] = cmp.mapping(function(fallback)
-			if luasnip.jumpable(1) then
-				luasnip.jump(1)
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-		["<S-Tab>"] = cmp.mapping(function(fallback)
-			if luasnip.jumpable(-1) then
-				luasnip.jump(-1)
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-		-- ["C-Space"] = cmp.mapping.complete(), -- in case the auto completion didn't trigger
-	}),
-	sources = cmp.config.sources({
-		{ name = "nvim_lsp" },
-		{ name = "luasnip" },
-		{ name = "buffer" },
-		{ name = "path" },
-	}),
 })

@@ -1,2 +1,11 @@
-feh --draw-filename --geometry 1920x1080 --scale-down --title Feh --image-bg #1A1A1A
+feh                  \
+--auto-zoom          \
+--cache-size 16      \
+--draw-filename      \
+--draw-tinted        \
+--geometry 1920x1080 \
+--image-bg #1A1A1A   \
+--info "echo 'Dimensions: %wx%h, Zoom: %z'" \
+--scale-down         \
+--title Feh
 

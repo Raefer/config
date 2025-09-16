@@ -3,7 +3,14 @@ return {
 		"hrsh7th/nvim-cmp",
 		dependencies = {
 			-- lsp
-			"neovim/nvim-lspconfig",
+			{
+				"mason-org/mason-lspconfig.nvim",
+				opts = {},
+				dependencies = {
+					{ "mason-org/mason.nvim", opts = {} },
+					"neovim/nvim-lspconfig",
+				},
+			},
 			-- completion
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
@@ -46,13 +53,29 @@ return {
 		version = "*",
 	},
 
+	{ -- text formatter
+		"preservim/vim-pencil",
+	},
+
+	{ -- highlight current paragraph
+		"junegunn/limelight.vim",
+	},
+
+	{ -- table formatter
+		"dhruvasagar/vim-table-mode",
+	},
+
+	{ -- markdown
+		"MeanderingProgrammer/render-markdown.nvim",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-tree/nvim-web-devicons",
+		},
+	},
+
 	{ -- latex
 		"lervag/vimtex",
-		lazy = false, -- we don't want to lazy load VimTeX
-		-- tag = "v2.15", -- uncomment to pin to a specific release
-		init = function()
-			-- VimTeX configuration goes here, e.g.
-		end,
+		lazy = false,
 	},
 
 	{ -- theme
@@ -88,8 +111,10 @@ return {
 			spec = {
 				-- Telescope search function
 				{ "<leader>s", group = " Search" },
-				-- { "<leader>l", group = " List" },
-				-- { "<leader>g", group = " Go to" },
+				{ "<leader>l", group = " List" },
+				{ "<leader>g", group = " Go to" },
+				{ "<leader>t", group = " TeX" },
+				{ "<leader>n", group = " Neorg" },
 			},
 		},
 	},

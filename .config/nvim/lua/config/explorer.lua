@@ -6,10 +6,10 @@ local function on_attach(bufnr)
 	api.config.mappings.default_on_attach(bufnr)
 end
 
-Map("<leader>e", name, "Open [F]ile explorer", function()
+Map("<leader>e", name, "Open file [E]xplorer", function()
 	api.tree.focus()
 end)
-Map("<C-s>", name, "[S]ave", "<cmd>w<CR>")
+-- Map("<C-s>", name, "[S]ave", "<cmd>w<CR>", nil, nil, "n")
 
 require("nvim-tree").setup({
 	on_attach = on_attach,

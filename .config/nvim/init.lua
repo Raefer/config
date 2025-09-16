@@ -2,13 +2,15 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- nerd font
+vim.g.have_nerd_font = true
+
 -- disable netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwplugin = 1
 
--- nerd font
---vim.opt.nofoldenable = true
-vim.g.have_nerd_font = true
+-- disable folding
+vim.opt.foldenable = false
 
 -- system
 vim.opt.clipboard = "unnamedplus" -- clipboard
@@ -52,6 +54,17 @@ vim.opt.showmode = false -- disable mode display, since the status line already 
 vim.opt.signcolumn = "yes"
 vim.opt.termguicolors = true -- enable 24-bit color in the tui
 
+-- open help to the right
+vim.api.nvim_create_autocmd("BufWinEnter", {
+	group = vim.api.nvim_create_augroup("help_window_right", {}),
+	pattern = { "*.txt" },
+	callback = function()
+		if vim.o.filetype == "help" then
+			vim.cmd.wincmd("L")
+		end
+	end,
+})
+
 --- Add a new mapping
 ---@param keys string Keymap
 ---@param name string
@@ -93,6 +106,14 @@ require("lazy").setup({
 	-- checker = { enabled = true }, -- check updates for plugins
 })
 
+-- quickload config
+
+-- Map("<leader>vsc", "Default", "[S]ource [C]onfig", "<cmd>source ~/.config/nvim/init.lua<CR>")
+
 -- plugins
 
 require("config")
+
+vim.cmd([[
+so ~/.config/nvim/legacy.vim
+]])

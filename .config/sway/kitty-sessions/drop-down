@@ -1,0 +1,3 @@
+launch dropdown-term-env.sh
+os_window_class dropdown-terminal
+os_window_size 100c 60c
