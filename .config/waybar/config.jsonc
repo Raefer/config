@@ -30,7 +30,7 @@
         "timezones": [
             "Australia/West",
             "Europe/Berlin",
-            "US/Eastern",
+            // "US/Eastern",
             "US/Pacific"
         ],
         "tooltip-format": "<span size='10pt' font='JetBrainsMono Nerd Font'>{tz_list}\n{calendar}</span>",

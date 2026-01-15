@@ -46,15 +46,20 @@ vim.opt.sidescrolloff = 5 -- number of columns to keep to the left and right of 
 vim.opt.wrap = true -- allow line wrapping
 
 -- ui
-vim.opt.colorcolumn = ""
-vim.opt.cursorline = false
+vim.opt.colorcolumn = "80"
+vim.opt.cursorline = true
+vim.opt.cursorcolumn = false
 vim.opt.inccommand = "split" -- incrementally show command effect
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.showmode = false -- disable mode display, since the status line already displayed it
 vim.opt.signcolumn = "yes"
 vim.opt.termguicolors = true -- enable 24-bit color in the tui
 
--- open help to the right
+-- Reload config
+vim.api.nvim_create_user_command("Srcconfig", "source ~/.config/nvim/init.lua", {})
+
+-- Open help to the right
 vim.api.nvim_create_autocmd("BufWinEnter", {
 	group = vim.api.nvim_create_augroup("help_window_right", {}),
 	pattern = { "*.txt" },

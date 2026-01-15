@@ -36,8 +36,10 @@ get_return_value() {
 PROMPT_COMMAND='PS1=" $(get_return_value) $BLU_PROMPT\w$(__git_ps1) $GRY_PROMPT»$BLK_PROMPT "'
 PS2=" > "
 
-# path for scripts
-PATH="$HOME/.cargo/bin:$HOME/script:$PATH"
+# path for cargo, scripts, and local bin
+PATH="$HOME/.cargo/bin:$PATH"
+PATH="$HOME/scripts:$PATH"
+PATH="$HOME/.local/bin:$PATH"
 export PATH
 
 # for some reason these stuffs keep coming back
@@ -45,37 +47,35 @@ if [[ -f $HOME/.local/share/recently-used.xbel ]]; then
     rm $HOME/.local/share/recently-used.xbel
 fi
 
-UNWANTED_DIR=(
-   "Desktop"
-   "Downloads"
-   "Documents"
-   "Music"
-   "Pictures"
-   "Public"
-   "Templates"
-   "Videos"
-)
-
-for item in "${UNWANTED_DIR[@]}"; do
-    if [[ -d $HOME/$item ]]; then
-        rmdir $HOME/$item
-    fi
-done
-
-# alias
-alias pm="pulsemixer"
+# UNWANTED_DIR=(
+#    "Desktop"
+#    "Downloads"
+#    "Documents"
+#    "Music"
+#    "Pictures"
+#    "Public"
+#    "Templates"
+#    "Videos"
+# )
+#
+# for item in "${UNWANTED_DIR[@]}"; do
+#     if [[ -d $HOME/$item ]]; then
+#         rmdir $HOME/$item
+#     fi
+# done
 
 # Unix tool replacement
 alias cat="bat"
 alias ls="eza"
 
-# cd shorthand
-alias stg="cd /stg"
-
 # lazy command
 alias l="ls -l"
+alias editsnippets="nvim ~/.config/nvim/lua/config/snippets.lua"
+alias notes="cd ~/notes/ && nvim ."
 
-# lazy nvim
-# alias journal="nvim ~/latex/journal/"
-# alias math="nvim ~/latex/hs/math/"
-# alias notes="nvim ~/notes/"
+# print reminder
+alias reminder="echo '>> cat -p ~/documents/reminder.txt' && cat -p ~/documents/reminder.txt"
+
+# clear command
+alias clear="clear -x"
+

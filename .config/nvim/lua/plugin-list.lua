@@ -65,18 +65,22 @@ return {
 		"dhruvasagar/vim-table-mode",
 	},
 
-	{ -- markdown
-		"MeanderingProgrammer/render-markdown.nvim",
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"nvim-tree/nvim-web-devicons",
-		},
-	},
+	-- { -- markdown
+	-- 	"MeanderingProgrammer/render-markdown.nvim",
+	-- 	dependencies = {
+	-- 		"nvim-treesitter/nvim-treesitter",
+	-- 		"nvim-tree/nvim-web-devicons",
+	-- 	},
+	-- },
 
 	{ -- latex
 		"lervag/vimtex",
 		lazy = false,
 	},
+
+    { -- lilypond
+        "martineausimon/nvim-lilypond-suite"
+    },
 
 	{ -- theme
 		"navarasu/onedark.nvim",
@@ -115,6 +119,7 @@ return {
 				{ "<leader>g", group = " Go to" },
 				{ "<leader>t", group = " TeX" },
 				{ "<leader>n", group = " Neorg" },
+                { "<leader>p", group = " Pencil Mode" }
 			},
 		},
 	},

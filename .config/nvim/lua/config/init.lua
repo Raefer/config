@@ -1,6 +1,7 @@
 require("config.documents")
 require("config.explorer")
 require("config.indicator")
+require("config.lilypond")
 require("config.lsp")
 require("config.telescope")
 require("config.theme")

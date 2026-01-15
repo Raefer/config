@@ -34,7 +34,8 @@ exec waybar
 exec Telegram -startintray
 exec fcitx5
 exec opensnitch-ui
-exec steam -silent
+exec carla --no-gui /home/raefer/documents/carla-config.carxp
+# exec steam -silent
 output * bg #000000 solid_color
 
 ### variables
@@ -50,13 +51,10 @@ set $Term "kitty --title Terminal"
 
 set $Term-dropdown "kitty --title 'Dropdown Terminal' --session ~/.config/sway/kitty-sessions/drop-down"
 
-set $FM-GUI "pcmanfm"
-set $FM-TUI "kitty --title Terminal --session ~/.config/sway/kitty-sessions/tui-fm"
-
 ### output configuration
 output DP-1 resolution 2560x1440 position 0,0
 output HDMI-A-1 resolution 2560x1440 position 2560,0
-output DP-2 resolution 2560x1440 position 5120,0
+# output DP-2 resolution 2560x1440 position 5120,0
 
 # default workspaces per monitor
 # workspace name will be handled by waybar
@@ -93,6 +91,8 @@ for_window [class="feh"] floating enable
 assign [class="steam_app_*"] number 1
 assign [class="DaggerfallUnity.x86_64"] number 1
 
+for_window [class="Surge XT"] floating enable
+
 ################################################################################
 
 ### key bindings
@@ -104,11 +104,10 @@ assign [class="DaggerfallUnity.x86_64"] number 1
     bindsym $Mod+t exec $Term-dropdown
     # browser
     bindsym $Mod+backspace exec $Browser
-    # file manager
-    # bindsym $Mod+e exec $FM-GUI
-    # bindsym $Mod+shift+e exec $FM-TUI
     # programs
-    # bindsym $Mod+s exec steam
+    #bindsym $Mod+s exec steam
+    #bindsym $Mod+c exec qalculate-gtk
+    #bindsym $Mod+a exec "killall darktable; darktable"
 #
 # windows:
 #
@@ -167,7 +166,7 @@ assign [class="DaggerfallUnity.x86_64"] number 1
     bindsym $Mod+r reload
 
     # kill window manager
-    bindsym $Mod+m exec swaymsg exit
+    bindsym $Mod+ctrl+shift+q exec swaymsg exit
 #
 # manual tiler:
 #
@@ -191,8 +190,16 @@ assign [class="DaggerfallUnity.x86_64"] number 1
 # screrenshots
 #
     bindsym $Mod+i exec "screenshot.sh all"
-    bindsym $Mod+o exec "screenshot.sh center"
-    bindsym $Mod+p exec "screenshot.sh right"
+    bindsym $Mod+o exec "screenshot.sh primary"
+    bindsym $Mod+p exec "screenshot.sh secondary"
+    bindsym $Mod+m exec "screenshot.sh mining"
+#
+# volume control
+#
+    # bindsym $Mod+alt+equal exec "pactl set-sink-volume @DEFAULT_SINK@ +5%"
+    # bindsym $Mod+alt+minus exec "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+    # bindsym $Mod+alt+plus exec "pactl set-sink-volume @DEFAULT_SINK@ 30%"
 #
 
 include /etc/sway/config.d/*
+

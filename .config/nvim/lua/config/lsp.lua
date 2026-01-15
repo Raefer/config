@@ -77,21 +77,21 @@ require("conform").setup({
 		lua = { "stylua" },
 		tex = { "latexindent" },
 	},
-	format_on_save = function(bufnr)
-		-- local disable_filetypes = { c = true, cpp = true }
-		local disable_filetypes = {}
-		local lsp_format_opt
-		if disable_filetypes[vim.bo[bufnr].filetype] then
-			lsp_format_opt = "never"
-		else
-			lsp_format_opt = "fallback"
-		end
-
-		return {
-			timeout_ms = 500,
-			lsp_format = lsp_format_opt,
-		}
-	end,
+	-- format_on_save = function(bufnr)
+	-- 	-- local disable_filetypes = { c = true, cpp = true }
+	-- 	local disable_filetypes = {}
+	-- 	local lsp_format_opt
+	-- 	if disable_filetypes[vim.bo[bufnr].filetype] then
+	-- 		lsp_format_opt = "never"
+	-- 	else
+	-- 		lsp_format_opt = "fallback"
+	-- 	end
+	--
+	-- 	return {
+	-- 		timeout_ms = 500,
+	-- 		lsp_format = lsp_format_opt,
+	-- 	}
+	-- end,
 })
 
 local name = "Conform"
@@ -118,9 +118,12 @@ cmp.setup({
 		["<C-z>"] = cmp.mapping.confirm({ select = true }),
 		["<C-_>"] = cmp.mapping.confirm({ select = true }),
 		["<CR>"] = cmp.mapping.confirm({ select = false }),
+		["<Tab>"] = cmp.mapping.confirm({ select = true }),
 
 		["<C-n>"] = cmp.mapping(function(fallback)
-			if luasnip.jumpable(1) then
+			if cmp.visible() then
+				cmp.select_next_item(select_opts)
+			elseif luasnip.jumpable(1) then
 				luasnip.jump(1)
 			else
 				fallback()
@@ -128,30 +131,12 @@ cmp.setup({
 		end, { "i", "s" }),
 
 		["<C-p>"] = cmp.mapping(function(fallback)
-			if luasnip.jumpable(-1) then
+			if cmp.visible() then
+				cmp.select_prev_item(select_opts)
+			elseif luasnip.jumpable(-1) then
 				luasnip.jump(-1)
 			else
 				fallback()
-			end
-		end, { "i", "s" }),
-
-		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item(select_opts)
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-
-		["<S-Tab>"] = cmp.mapping(function(fallback)
-			local col = vim.fn.col(".") - 1
-
-			if cmp.visible() then
-				cmp.select_prev_item(select_opts)
-			elseif col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
-				fallback()
-			else
-				cmp.complete()
 			end
 		end, { "i", "s" }),
 
@@ -179,7 +164,7 @@ cmp.setup({
 	}),
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
-		{ name = "luasnip" },
+		{ name = "luasnip", "ultisnips" },
 		-- { name = "buffer" },
 		{ name = "path" },
 	}),
@@ -192,7 +177,9 @@ require("mason-lspconfig").setup({
 	ensure_installed = {
 		"clangd", -- c
 		"lua_ls", -- lua
+		"rust_analyzer", -- rust
 		"texlab", -- tex
+		"ts_ls", -- typescript, javascript
 	},
 })
 
@@ -244,6 +231,21 @@ require("lspconfig")["lua_ls"].setup({
 	end,
 })
 
+require("lspconfig")["rust_analyzer"].setup({
+	-- capabilities = capabilities,
+	settings = {
+		["rust-analyzer"] = {
+			diagnostics = {
+				enable = true,
+			},
+		},
+	},
+})
+
 require("lspconfig")["texlab"].setup({
+	capabilities = capabilities,
+})
+
+require("lspconfig")["ts_ls"].setup({
 	capabilities = capabilities,
 })

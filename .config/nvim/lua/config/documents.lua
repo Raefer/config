@@ -31,7 +31,7 @@ require("neorg").setup({
 		["core.dirman"] = {
 			config = {
 				workspaces = {
-					notes = "~/norg",
+					notes = "~/notes",
 				},
 				default_workspace = "notes",
 			},
@@ -47,28 +47,28 @@ end)
 
 vim.wo.conceallevel = 2
 
--- markdown
-
--- https://github.com/MeanderingProgrammer/render-markdown.nvim
-require("render-markdown").setup({
-	heading = {
-		backgrounds = {},
-		icons = { "◉ ", "◎ ", "○ " },
-	},
-	bullet = {
-		icons = { "•" },
-	},
-	anti_conceal = {
-		-- enabled = false,
-		-- disabled_modes = { "n", "c", "t" },
-	},
-	latex = {
-		enabled = false,
-	},
-	sign = {
-		enabled = false,
-	},
-})
+-- -- markdown
+--
+-- -- https://github.com/MeanderingProgrammer/render-markdown.nvim
+-- require("render-markdown").setup({
+-- 	heading = {
+-- 		backgrounds = {},
+-- 		icons = { "◉ ", "◎ ", "○ " },
+-- 	},
+-- 	bullet = {
+-- 		icons = { "•" },
+-- 	},
+-- 	anti_conceal = {
+-- 		-- enabled = false,
+-- 		-- disabled_modes = { "n", "c", "t" },
+-- 	},
+-- 	latex = {
+-- 		enabled = false,
+-- 	},
+-- 	sign = {
+-- 		enabled = false,
+-- 	},
+-- })
 
 -- latex
 
